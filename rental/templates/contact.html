@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us | DriveEase{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+
+    <div class="reveal">
+
+        <p class="tagline">WE ARE HERE TO HELP</p>
+
+        <h1>Contact <span>Us</span></h1>
+
+        <p>Have a question? Send us a message.</p>
+
+    </div>
+
+</section>
+
+
+<section class="section contact-layout">
+
+    <div class="contact-details reveal">
+
+        <h2>Get In Touch</h2>
+
+        <p>
+            We would love to help you plan your next journey.
+        </p>
+
+        <div class="contact-item">
+            <span>📍</span>
+
+            <div>
+                <h3>Location</h3>
+                <p>Salem, Tamil Nadu, India</p>
+            </div>
+        </div>
+
+        <div class="contact-item">
+            <span>📞</span>
+
+            <div>
+                <h3>Phone</h3>
+                <p>+91 9003133693</p>
+            </div>
+        </div>
+
+        <div class="contact-item">
+            <span>✉️</span>
+
+            <div>
+                <h3>Email</h3>
+                <p>ilyas@gmail.com</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <form method="POST"
+          class="form-card reveal">
+
+        {% csrf_token %}
+
+        <h2>Send a Message</h2>
+
+        <label for="name">Your Name</label>
+
+        <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter your name"
+            required>
+
+        <label for="email">Email Address</label>
+
+        <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+            required>
+
+        <label for="message">Your Message</label>
+
+        <textarea
+            name="message"
+            id="message"
+            rows="5"
+            placeholder="How can we help?"
+            required></textarea>
+
+        <button type="submit" class="btn btn-full">
+            Send Message →
+        </button>
+
+    </form>
+
+</section>
+
+
+<section class="section reviews-section">
+
+    <div class="section-heading reveal">
+
+        <p class="tagline">CUSTOMER FEEDBACK</p>
+
+        <h2>What People <span>Say</span></h2>
+
+        <p>
+            Sample reviews for demonstration.
+            Replace them with genuine customer feedback.
+        </p>
+
+    </div>
+
+
+    <div class="review-grid">
+
+        <article class="review-card reveal">
+
+            <div class="stars">★★★★★</div>
+
+            <p>
+                "The website was simple to use and the booking
+                process was easy to understand."
+            </p>
+
+            <h3>karim </h3>
+
+            <small> Kind gesture</small>
+
+        </article>
+
+
+        <article class="review-card reveal">
+
+            <div class="stars">★★★★★</div>
+
+            <p>
+                "I could easily browse the available cars and
+                compare their daily prices."
+            </p>
+
+            <h3>john</h3>
+
+            <small> easy to access</small>
+
+        </article>
+
+
+        <article class="review-card reveal">
+
+            <div class="stars">★★★★★</div>
+
+            <p>
+                "A convenient design for checking rental details
+                and keeping track of bookings."
+            </p>
+
+            <h3>ahamed</h3>
+
+            <small>Great service</small>
+
+        </article>
+
+    </div>
+
+</section>
+
+{% endblock %}

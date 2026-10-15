@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="cars-page">
+
+    <h1>Available Cars</h1>
+
+    <p>Choose your favourite car and book your ride!</p>
+
+    <div class="car-container">
+
+        {% for car in cars %}
+
+        <div class="car-card">
+
+            {% if car.image %}
+                <img src="{{ car.image.url }}"
+                     alt="{{ car.name }}">
+            {% endif %}
+
+            <h2>{{ car.name }}</h2>
+
+            <p>Price: ₹{{ car.price_per_day }} per day</p>
+
+            {% if car.available %}
+                <p class="available">Available</p>
+
+                <a href="{% url 'booking' car.id %}"
+                   class="btn">
+                    Book Now
+                </a>
+            {% else %}
+                <p>Currently unavailable</p>
+            {% endif %}
+
+        </div>
+
+        {% empty %}
+
+        <p>No cars have been added yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

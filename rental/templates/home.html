@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block title %}Home | DriveEase{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-content reveal">
+
+        <p class="tagline">WELCOME TO IA</p>
+
+        <h1>
+            Your Journey.<br>
+            <span>Your Freedom.</span>
+        </h1>
+
+        <p>
+            Discover the perfect car for your next adventure.
+            Affordable prices, comfortable rides and easy booking.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{% url 'cars' %}" class="btn">
+                Explore Cars →
+            </a>
+
+            <a href="#about" class="btn btn-outline">
+                About Us
+            </a>
+
+        </div>
+
+        <div class="hero-features">
+            <span>✓ Easy Booking</span>
+            <span>✓ Affordable Prices</span>
+            <span>✓ Multiple Cars</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="stats reveal">
+
+    <div>
+        <h2>Easy</h2>
+        <p>Online Booking</p>
+    </div>
+
+    <div>
+        <h2>Flexible</h2>
+        <p>Rental Options</p>
+    </div>
+
+    <div>
+        <h2>Simple</h2>
+        <p>Daily Pricing</p>
+    </div>
+
+    <div>
+        <h2>Reliable</h2>
+        <p>Customer Support</p>
+    </div>
+
+</section>
+
+
+<section class="section" id="about">
+
+    <div class="section-heading reveal">
+
+        <p class="tagline">ABOUT OUR COMPANY</p>
+
+        <h2>Discover Our <span>Story</span></h2>
+
+        <p>
+            Making every journey comfortable and memorable.
+        </p>
+
+    </div>
+
+    <div class="about-grid">
+
+        <div class="about-image reveal">
+
+            <img
+                src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=85"
+                alt="Modern car">
+
+        </div>
+
+        <div class="about-text reveal">
+
+            <h2>Our History</h2>
+
+            <p>
+                DriveEase is a car rental management project
+                designed to make vehicle rentals simple and convenient.
+            </p>
+
+            <p>
+                Customers can explore available vehicles, check rental
+                prices, register accounts and book cars online.
+            </p>
+
+            <h3>Our Mission</h3>
+
+            <p>
+                To make transportation easier by providing a simple
+                platform for discovering and booking rental vehicles.
+            </p>
+
+            <h3>Why Choose Us?</h3>
+
+            <ul>
+                <li>Easy online reservations</li>
+                <li>Different vehicle options</li>
+                <li>Transparent daily rental prices</li>
+                <li>Convenient booking history</li>
+            </ul>
+
+            <a href="{% url 'cars' %}" class="btn">
+                Explore Our Cars →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section featured-section">
+
+    <div class="section-heading reveal">
+
+        <p class="tagline">OUR VEHICLES</p>
+
+        <h2>Popular <span>Cars</span></h2>
+
+    </div>
+
+    <div class="car-grid">
+
+        {% for car in cars|slice:":3" %}
+
+        <div class="car-card reveal">
+
+            {% if car.image %}
+
+                <img src="{{ car.image.url }}"
+                     alt="{{ car.name }}">
+
+            {% else %}
+
+                <div class="image-placeholder">
+                    🚘
+                    <p>Car image not uploaded</p>
+                </div>
+
+            {% endif %}
+
+            <div class="car-info">
+
+                <h3>{{ car.name }}</h3>
+
+                <p>{{ car.model }}</p>
+
+                <h3 class="price">
+                    ₹{{ car.price_per_day }}
+                    <small>/ day</small>
+                </h3>
+
+                {% if car.available %}
+
+                    <a href="{% url 'booking' car.id %}"
+                       class="btn">
+                        Book Now
+                    </a>
+
+                {% else %}
+
+                    <button class="btn" disabled>
+                        Not Available
+                    </button>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-state">
+            <h3>No cars added yet!</h3>
+
+            <p>
+                Add vehicles and upload their images through
+                Django Admin.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="center">
+        <a href="{% url 'cars' %}" class="btn">
+            View All Cars →
+        </a>
+    </div>
+
+</section>
+
+
+<section class="section location-section">
+
+    <div class="location-card reveal">
+
+        <div>
+
+            <p class="tagline">VISIT US</p>
+
+            <h2>Our <span>Location</span></h2>
+
+            <p>
+                Contact our team to learn more about available
+                vehicles and rental services.
+            </p>
+
+            <p>
+                <strong>Location:</strong>
+                Salem, Tamil Nadu, India
+            </p>
+
+            <p>
+                <strong>Phone:</strong>
+                +91 9003133693
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                ilyas@gmail.com
+            </p>
+
+            <a href="{% url 'contact' %}" class="btn">
+                Contact Us →
+            </a>
+
+        </div>
+
+        <div class="location-art">
+            📍
+            <h3>Find Your Next Ride</h3>
+            <p>IA Car Rental</p>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

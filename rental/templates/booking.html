@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Book Your Car | DriveEase{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+
+    <div class="reveal">
+
+        <p class="tagline">YOUR JOURNEY STARTS HERE</p>
+
+        <h1>Book Your <span>Car</span></h1>
+
+    </div>
+
+</section>
+
+
+<section class="section booking-layout">
+
+    <div class="booking-summary reveal">
+
+        {% if car.image %}
+
+            <img src="{{ car.image.url }}"
+                 alt="{{ car.name }}"
+                 class="booking-image">
+
+        {% else %}
+
+            <div class="image-placeholder">
+                🚘
+            </div>
+
+        {% endif %}
+
+        <div class="car-info">
+
+            <p class="tagline">SELECTED VEHICLE</p>
+
+            <h2>{{ car.name }}</h2>
+
+            <p>{{ car.model }}</p>
+
+            <h2 class="price">
+                ₹{{ car.price_per_day }}
+                <small>/ day</small>
+            </h2>
+
+            <p>
+                Select your pickup and return dates to
+                calculate the rental cost.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <form method="POST"
+          class="form-card reveal"
+          id="bookingForm">
+
+        {% csrf_token %}
+
+        <h2>Booking Details</h2>
+
+        <label for="pickup_date">
+            Pickup Date
+        </label>
+
+        <input
+            type="date"
+            name="pickup_date"
+            id="pickup_date"
+            required>
+
+        <label for="return_date">
+            Return Date
+        </label>
+
+        <input
+            type="date"
+            name="return_date"
+            id="return_date"
+            required>
+
+        <p id="dateHint" class="form-hint">
+            Select a return date after your pickup date.
+        </p>
+
+        <button type="submit" class="btn btn-full">
+            Confirm Booking →
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}

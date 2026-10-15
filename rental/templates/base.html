@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}DriveEase Car Rental{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <div class="top-bar">
+        🚘 Your Journey, Your Rules — Find Your Perfect Ride!
+    </div>
+
+    <header class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            I<span>A</span>
+        </a>
+
+        <button class="menu-toggle" type="button"
+                aria-label="Toggle navigation"
+                aria-expanded="false">
+            ☰
+        </button>
+
+        <nav id="siteNav">
+
+            <a href="{% url 'home' %}">Home</a>
+
+            <a href="{% url 'cars' %}">Available Cars</a>
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'my_bookings' %}">
+                    My Bookings
+                </a>
+
+                <a href="{% url 'user_logout' %}">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}">Login</a>
+
+                <a href="{% url 'register' %}"
+                   class="signup">
+                    Register
+                </a>
+
+            {% endif %}
+
+            <a href="{% url 'contact' %}">Contact</a>
+
+        </nav>
+
+    </header>
+
+    {% if messages %}
+        <div class="messages">
+
+            {% for message in messages %}
+                <p class="message {{ message.tags }}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+
+        </div>
+    {% endif %}
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+
+        <h2>Drive<span>Ease</span></h2>
+
+        <p>Your trusted partner for comfortable journeys.</p>
+
+        <div class="footer-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'cars' %}">Cars</a>
+            <a href="{% url 'contact' %}">Contact</a>
+        </div>
+
+        <p class="copyright">
+            © {% now "Y" %} IA Car Rental.
+            All rights reserved.
+        </p>
+
+    </footer>
+
+    <script src="{% static 'js/script.js' %}" defer></script>
+
+</body>
+</html>
